@@ -1,0 +1,715 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+:root {
+  font-family: "Inter", sans-serif;
+  color: #edf5f2;
+  background: #09110f;
+  --green: #36e58a;
+  --red: #ff5966;
+  --yellow: #ffc75c;
+  --panel: #101b19;
+  --muted: #94a9a2;
+  --border: rgba(160, 202, 185, 0.13);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button, select { font: inherit; }
+button { cursor: pointer; transition: 0.2s ease; }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.app-shell {
+  min-height: 100vh;
+  padding: 28px 18px;
+  background: radial-gradient(ellipse at 5% 0%, #143526, transparent 35%), #09110f;
+  color: #edf5f2;
+}
+
+.dashboard { max-width: 1420px; margin: auto; }
+
+.topbar, .topbar-actions, .brand, .system-status,
+.hero, .stats-row, .stat-card, .panel-heading, .live-tag,
+.wait-card-top, .wait-data, .buttons, .legend,
+.emergency-actions, .feature-switches {
+  display: flex;
+  align-items: center;
+}
+
+.topbar { justify-content: space-between; gap: 18px; margin-bottom: 30px; }
+.brand { font-size: 22px; font-weight: 900; letter-spacing: -1px; }
+.brand > span:first-child, .brand-green { color: var(--green); }
+.brand > span:first-child { margin-right: 7px; font-size: 26px; }
+.topbar-actions { justify-content: flex-end; flex-wrap: wrap; gap: 12px; }
+
+.icon-control {
+  padding: 10px 13px;
+  color: #e8f3ed;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.icon-control:hover { border-color: var(--green); }
+
+.system-status {
+  gap: 8px;
+  color: #a7b8b2;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.system-status i, .live-tag i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #77847e;
+}
+
+.system-status.is-running i, .live-tag i {
+  background: var(--green);
+  box-shadow: 0 0 10px #36e58a88;
+}
+
+.hero { justify-content: space-between; align-items: stretch; gap: 25px; margin-bottom: 22px; }
+.eyebrow { margin: 0 0 9px; color: var(--green); font-size: 10px; font-weight: 800; letter-spacing: 1.7px; }
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.12;
+  font-weight: 900;
+  letter-spacing: -1.8px;
+}
+
+.hero h1 span { color: var(--green); }
+
+.hero-copy {
+  max-width: 650px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.current-phase {
+  min-width: 195px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 9px;
+  padding: 19px;
+  border: 1px solid #36e58a40;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #19422f, #101e18);
+}
+
+.current-phase > span { color: #a4b8ad; font-size: 9px; font-weight: 800; letter-spacing: 1.2px; }
+.current-phase > strong { font-size: 27px; font-weight: 900; }
+.current-phase > small { color: #a6b9b1; font-size: 10px; }
+
+.status-pill, .mini-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 9px;
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.7px;
+}
+
+.status-pill.green, .mini-pill.green { color: var(--green); background: #36e58a18; }
+.status-pill.yellow, .mini-pill.yellow { color: var(--yellow); background: #ffc75c18; }
+.status-pill.red, .mini-pill.red { color: var(--red); background: #ff596618; }
+.status-pill.emergency { color: white; background: #cf2638; animation: emergencyFlash .7s infinite alternate; }
+
+@keyframes emergencyFlash {
+  from { box-shadow: 0 0 0 transparent; }
+  to { box-shadow: 0 0 16px #ff364a99; }
+}
+
+/* SUMMARY */
+
+.stats-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 22px; }
+
+.stat-card {
+  min-width: 0;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: linear-gradient(135deg, #13201d, #0f1917);
+}
+
+.stat-icon {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #22332d;
+  font-size: 22px;
+}
+
+.green-icon { color: var(--green); }
+.orange-icon { color: #ffc879; }
+.stat-card small { display: block; margin-bottom: 7px; color: #8ea49a; font-size: 9px; font-weight: 800; letter-spacing: 1px; }
+.stat-card strong { display: block; overflow-wrap: anywhere; font-size: clamp(15px, 2vw, 22px); font-weight: 800; }
+.stat-card em { color: #91a59b; font-size: 11px; font-style: normal; }
+
+/* PANELS */
+
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(285px, .85fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.panel {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: linear-gradient(145deg, #121e1b, #0e1715);
+  box-shadow: 0 12px 35px #00000012;
+}
+
+.panel-heading { justify-content: space-between; gap: 13px; margin-bottom: 19px; }
+.panel-heading .eyebrow { margin-bottom: 7px; }
+.panel-heading h2 { margin: 0; font-size: 19px; letter-spacing: -.4px; }
+
+.live-tag {
+  flex-shrink: 0;
+  gap: 7px;
+  padding: 8px 10px;
+  border: 1px solid #36e58a22;
+  border-radius: 7px;
+  color: #a8c2b5;
+  background: #36e58a09;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+/* ROAD AND JUNCTION */
+
+.intersection {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  height: clamp(410px, 47vw, 570px);
+  overflow: hidden;
+  border: 1px solid #3b4945;
+  border-radius: 12px;
+  background: #1c2826;
+  background-image:
+    radial-gradient(circle at 20% 30%, #ffffff08 0 1px, transparent 1.5px),
+    radial-gradient(circle at 70% 70%, #00000015 0 1px, transparent 1.5px);
+  background-size: 24px 26px, 31px 29px;
+}
+
+.road {
+  position: absolute;
+  z-index: 0;
+  background-color: #303a3b;
+  background-image: radial-gradient(circle at 20% 30%, #ffffff04 0 1px, transparent 1.5px);
+  background-size: 23px 27px;
+}
+
+.road-ns {
+  top: 0;
+  bottom: 0;
+  left: 31%;
+  width: 38%;
+  border-left: 2px solid #5c6561;
+  border-right: 2px solid #5c6561;
+}
+
+.road-ew {
+  top: 31%;
+  bottom: 31%;
+  left: 0;
+  right: 0;
+  border-top: 2px solid #5c6561;
+  border-bottom: 2px solid #5c6561;
+}
+
+.road-center {
+  position: absolute;
+  z-index: 1;
+  opacity: .75;
+  pointer-events: none;
+}
+
+.ns-center { top: 0; bottom: 0; left: 49.5%; border-left: 2px dashed #b6b8a9; }
+.ew-center { top: 49.5%; left: 0; right: 0; border-top: 2px dashed #b6b8a9; }
+
+.junction-box {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 82px;
+  height: 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  border: 1px solid #c4d6cc26;
+  border-radius: 9px;
+  background: #131e1ccc;
+  pointer-events: none;
+}
+
+.junction-box b { color: #d5e1d9; font-size: 11px; letter-spacing: 1px; }
+.junction-box small { margin-top: 4px; color: #91a69b; font-size: 7px; letter-spacing: 1.2px; }
+
+.stop-line {
+  position: absolute;
+  z-index: 3;
+  border-color: #f4f0d9;
+  border-style: solid;
+  opacity: .88;
+  pointer-events: none;
+}
+
+.stop-north { top: 30.5%; left: 31%; width: 38%; border-top-width: 3px; }
+.stop-south { bottom: 30.5%; left: 31%; width: 38%; border-top-width: 3px; }
+.stop-east { top: 31%; bottom: 31%; right: 30.5%; border-left-width: 3px; }
+.stop-west { top: 31%; bottom: 31%; left: 30.5%; border-left-width: 3px; }
+
+/* TRAFFIC LIGHTS */
+
+.signal-position {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signal-north { top: 3%; left: 51%; }
+.signal-south { bottom: 3%; left: 51%; flex-direction: column-reverse; }
+.signal-east { top: 51%; right: 2%; transform: translateY(-50%); flex-direction: row; gap: 6px; }
+.signal-west { top: 51%; left: 2%; transform: translateY(-50%); flex-direction: row-reverse; gap: 6px; }
+
+.signal-unit { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+
+.traffic-light {
+  width: 29px;
+  padding: 5px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: 2px solid #4b5956;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #131b1b, #25302e, #111817);
+  box-shadow: 0 4px 12px #0008;
+}
+
+.lamp {
+  width: 16px;
+  height: 16px;
+  display: block;
+  border: 1px solid #3c4643;
+  border-radius: 50%;
+  background: #28302f;
+}
+
+.lamp.red.on { background: #ff4653; border-color: #ff7980; box-shadow: 0 0 14px #ff3d4ddd; }
+.lamp.yellow.on { background: #ffc64b; border-color: #ffe098; box-shadow: 0 0 14px #ffc64bcc; }
+.lamp.green.on { background: #39ef88; border-color: #a4ffd0; box-shadow: 0 0 15px #39ef88dd; }
+
+.signal-countdown {
+  min-width: 48px;
+  padding: 5px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid #ffffff20;
+  border-radius: 7px;
+  background: #101817;
+  box-shadow: 0 4px 12px #0006;
+}
+
+.signal-countdown span { color: #a5b8af; font-size: 7px; }
+.signal-countdown strong { font-size: 19px; line-height: 1.1; font-weight: 900; font-variant-numeric: tabular-nums; }
+.signal-countdown small { font-size: 7px; font-weight: 900; }
+.signal-countdown.green strong, .signal-countdown.green small { color: var(--green); }
+.signal-countdown.yellow strong, .signal-countdown.yellow small { color: var(--yellow); }
+.signal-countdown.red strong, .signal-countdown.red small { color: var(--red); }
+
+/* VEHICLES: fixed queues stay outside the center junction */
+
+.vehicle-lane {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  pointer-events: none;
+}
+
+.vehicle {
+  position: absolute;
+  width: 27px;
+  height: 45px;
+  display: block;
+  filter: drop-shadow(0 3px 3px #0008);
+  will-change: transform;
+}
+
+.vehicle-art { display: block; width: 100%; height: 100%; overflow: visible; }
+.vehicle-truck { width: 31px; height: 51px; }
+.vehicle-bike { width: 20px; height: 36px; }
+
+.face-north .vehicle-art { transform: rotate(180deg); }
+.face-south .vehicle-art { transform: rotate(0deg); }
+.face-east .vehicle-art { transform: rotate(-90deg); }
+.face-west .vehicle-art { transform: rotate(90deg); }
+
+/* All vehicles are stationary unless their own approach has green. */
+
+/* North traffic queues above the top stop line. */
+.lane-north .vehicle {
+  left: 40%;
+  top: calc(30% - 46px);
+}
+.lane-north .vehicle-1 { left: 44%; top: calc(30% - 91px); }
+.lane-north .vehicle-2 { left: 40%; top: calc(30% - 136px); }
+.lane-north .vehicle-3 { left: 44%; top: calc(30% - 181px); }
+.lane-north .vehicle-4 { left: 40%; top: calc(30% - 226px); }
+.lane-north .vehicle-5 { left: 44%; top: calc(30% - 271px); }
+
+/* South traffic queues below the bottom stop line. */
+.lane-south .vehicle { left: 54%; top: calc(69% - 45px); }
+.lane-south .vehicle-1 { left: 50%; top: calc(69% + 1px); }
+.lane-south .vehicle-2 { left: 54%; top: calc(69% + 47px); }
+.lane-south .vehicle-3 { left: 50%; top: calc(69% + 93px); }
+.lane-south .vehicle-4 { left: 54%; top: calc(69% + 139px); }
+.lane-south .vehicle-5 { left: 50%; top: calc(69% + 185px); }
+
+/* East traffic queues to the right of the east stop line. */
+.lane-east .vehicle { left: calc(69% - 1px); top: 38%; }
+.lane-east .vehicle-1 { left: calc(69% + 43px); top: 38%; }
+.lane-east .vehicle-2 { left: calc(69% + 87px); top: 38%; }
+.lane-east .vehicle-3 { left: calc(69% + 131px); top: 38%; }
+.lane-east .vehicle-4 { left: calc(69% + 175px); top: 38%; }
+.lane-east .vehicle-5 { left: calc(69% + 219px); top: 38%; }
+
+/* West traffic queues to the left of the west stop line. */
+.lane-west .vehicle { left: calc(31% - 45px); top: 54%; }
+.lane-west .vehicle-1 { left: calc(31% - 89px); top: 54%; }
+.lane-west .vehicle-2 { left: calc(31% - 133px); top: 54%; }
+.lane-west .vehicle-3 { left: calc(31% - 177px); top: 54%; }
+.lane-west .vehicle-4 { left: calc(31% - 221px); top: 54%; }
+.lane-west .vehicle-5 { left: calc(31% - 265px); top: 54%; }
+
+/* Explicitly stop cars on red and yellow. */
+.lane-stopped .vehicle,
+.lane-slowing .vehicle {
+  animation: none !important;
+}
+
+/* Only the green approach receives a movement animation. */
+.lane-north.lane-moving .vehicle {
+  animation: driveNorth 7s linear infinite;
+  animation-delay: calc(var(--vehicle-index) * -1.45s);
+}
+
+.lane-south.lane-moving .vehicle {
+  animation: driveSouth 7s linear infinite;
+  animation-delay: calc(var(--vehicle-index) * -1.45s);
+}
+
+.lane-east.lane-moving .vehicle {
+  animation: driveEast 7s linear infinite;
+  animation-delay: calc(var(--vehicle-index) * -1.45s);
+}
+
+.lane-west.lane-moving .vehicle {
+  animation: driveWest 7s linear infinite;
+  animation-delay: calc(var(--vehicle-index) * -1.45s);
+}
+
+@keyframes driveNorth {
+  from { transform: translateY(0); }
+  to { transform: translateY(620px); }
+}
+
+@keyframes driveSouth {
+  from { transform: translateY(0); }
+  to { transform: translateY(-620px); }
+}
+
+@keyframes driveEast {
+  from { transform: translateX(0); }
+  to { transform: translateX(-850px); }
+}
+
+@keyframes driveWest {
+  from { transform: translateX(0); }
+  to { transform: translateX(850px); }
+}
+
+/* EMERGENCY */
+
+.emergency-badge {
+  display: none;
+  position: absolute;
+  z-index: 12;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 43px);
+  padding: 7px 10px;
+  border: 1px solid #ff465380;
+  border-radius: 6px;
+  color: white;
+  background: #bd2638ee;
+  font-size: 8px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.emergency-badge.visible { display: block; animation: emergencyFlash .7s infinite alternate; }
+
+/* LEGEND */
+
+.legend { flex-wrap: wrap; gap: 12px 18px; margin-top: 18px; color: #a9bbb2; font-size: 10px; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend-green, .legend-red, .legend-vehicle { width: 10px; height: 10px; display: inline-block; flex-shrink: 0; border-radius: 50%; }
+.legend-green { background: var(--green); }
+.legend-red { background: var(--red); }
+.bike-dot { background: #cf4741; }
+.car-dot { background: #dce5e9; }
+.truck-dot { background: #347d9c; }
+.simulation-note { margin: 16px 0 0; color: #73887e; font-size: 9px; line-height: 1.6; }
+
+/* WAITING TIME */
+
+.muted, .wait-panel .muted { color: var(--muted); font-size: 11px; line-height: 1.7; }
+.wait-panel > .muted { margin: -5px 0 17px; }
+.clock { color: var(--green); font-size: 28px; }
+.wait-list { display: flex; flex-direction: column; gap: 10px; }
+.wait-card { padding: 13px; border: 1px solid var(--border); border-radius: 10px; background: #ffffff05; }
+.wait-card.green { border-color: #36e58a4d; background: #36e58a0b; }
+.wait-card.yellow { border-color: #ffc75c3d; }
+.wait-card-top { justify-content: space-between; margin-bottom: 11px; }
+.wait-card-top strong { font-size: 12px; }
+.wait-data { justify-content: space-between; gap: 10px; margin-top: 7px; color: #93a89e; font-size: 10px; }
+.wait-data b { color: #e3eee8; text-align: right; font-size: 10px; }
+.progress-track, .congestion-track { height: 5px; overflow: hidden; margin-top: 12px; border-radius: 20px; background: #283632; }
+.progress-track > div, .congestion-track > div { height: 100%; border-radius: inherit; background: linear-gradient(90deg, #1eac69, #51efa0); transition: width .5s ease; }
+.wait-card.yellow .progress-track > div { background: var(--yellow); }
+.wait-card.red .progress-track > div { background: #f05b67; }
+
+.safety-message { margin-top: 17px; padding: 13px; border: 1px solid #36e58a26; border-radius: 10px; background: #36e58a09; }
+.safety-message b { color: var(--green); font-size: 11px; }
+.safety-message p { margin: 7px 0 0; color: #a3b6ac; font-size: 10px; line-height: 1.7; }
+
+/* SETTINGS */
+
+.settings-panel { margin-top: 20px; }
+.settings-heading { justify-content: space-between; align-items: flex-end; }
+.settings-heading .muted { margin: 0 0 3px; text-align: right; }
+
+.density-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.density-control { min-width: 0; display: flex; flex-direction: column; gap: 9px; color: #a7bbb0; font-size: 11px; font-weight: 700; }
+
+.density-control select, .emergency-actions select {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 10px;
+  color: #e8f1ec;
+  border: 1px solid #31443b;
+  border-radius: 9px;
+  background: #17241f;
+  cursor: pointer;
+}
+
+.density-control select option, .emergency-actions select option { color: #edf5f2; background: #17241f; }
+.duration-help { margin: 15px 0; color: #849a8e; font-size: 10px; line-height: 1.7; }
+
+.feature-switches { flex-wrap: wrap; gap: 15px 28px; padding: 16px 0; margin: 4px 0 12px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.switch-control { position: relative; gap: 10px; cursor: pointer; }
+.switch-control input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.switch-track { position: relative; width: 34px; height: 19px; flex-shrink: 0; border-radius: 20px; background: #3a4741; transition: background .2s; }
+.switch-track::after { content: ""; position: absolute; top: 3px; left: 3px; width: 13px; height: 13px; border-radius: 50%; background: #d5ded8; transition: transform .2s; }
+.switch-control input:checked + .switch-track { background: #168951; }
+.switch-control input:checked + .switch-track::after { transform: translateX(15px); background: white; }
+.switch-control input:focus-visible + .switch-track { outline: 2px solid var(--green); outline-offset: 3px; }
+.switch-control b, .switch-control small { display: block; }
+.switch-control b { color: #e0ebe4; font-size: 11px; }
+.switch-control small { margin-top: 4px; color: #8da197; font-size: 9px; }
+
+.emergency-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 14px 0 20px;
+  padding: 17px;
+  border: 1px solid #ff59663b;
+  border-radius: 12px;
+  background: linear-gradient(110deg, #84222a20, #151c1933);
+}
+
+.emergency-control h3 { margin: 0; font-size: 15px; }
+.emergency-control .muted { margin: 7px 0 0; font-size: 10px; }
+.emergency-actions { justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+.emergency-actions select { width: auto; min-width: 130px; }
+
+.btn-emergency, .btn-cancel {
+  padding: 11px 13px;
+  border: 0;
+  border-radius: 8px;
+  color: white;
+  background: #b92f3d;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.btn-emergency:hover, .btn-cancel:hover { filter: brightness(1.15); transform: translateY(-1px); }
+.btn-cancel { color: #ffcbd0; border: 1px solid #ff647040; background: #402126; }
+
+.buttons { flex-wrap: wrap; gap: 10px; }
+.buttons button { padding: 12px 17px; border-radius: 9px; font-size: 11px; font-weight: 800; }
+.buttons button:not(:disabled):hover { transform: translateY(-2px); filter: brightness(1.08); }
+.btn-start { color: #071b11; border: 1px solid #4ff3a0; background: linear-gradient(135deg, #54f5a1, #24cf78); }
+.btn-pause { color: #f1c86f; border: 1px solid #f1c86f40; background: #f1c86f12; }
+.btn-reset { color: #bdcbc4; border: 1px solid #34443d; background: #19231f; }
+
+/* ANALYTICS */
+
+.analytics-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(260px, .8fr); gap: 20px; align-items: stretch; margin-top: 20px; }
+.analytics-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+.metric-card { min-width: 0; padding: 15px; border: 1px solid var(--border); border-radius: 11px; background: #ffffff05; }
+.metric-card span, .metric-card small { display: block; color: #9db0a6; font-size: 10px; }
+.metric-card strong { display: block; margin: 9px 0 6px; color: var(--green); font-size: 28px; font-weight: 900; font-variant-numeric: tabular-nums; }
+.metric-card small { font-size: 9px; line-height: 1.6; }
+
+.congestion-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 22px; color: #b3c4bb; font-size: 10px; }
+.congestion-heading b { color: var(--green); font-size: 15px; }
+.congestion-track { height: 8px; margin-top: 10px; }
+.congestion-track > div { background: linear-gradient(90deg, #35d989, #ffc75c, #ff5e69); }
+.congestion-labels { display: flex; justify-content: space-between; margin-top: 7px; color: #7f9589; font-size: 9px; }
+
+.empty-events { min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #82978c; }
+.empty-events > span { color: #567264; font-size: 30px; }
+.empty-events p { margin: 12px 0 5px; font-size: 12px; font-weight: 700; }
+.empty-events small { font-size: 10px; }
+
+.event-list { min-height: 160px; display: flex; flex-direction: column; gap: 16px; padding: 5px 0 15px; }
+.event-row { display: flex; align-items: flex-start; gap: 10px; }
+.event-dot { width: 8px; height: 8px; flex-shrink: 0; margin-top: 4px; border-radius: 50%; background: #ff6470; box-shadow: 0 0 8px #ff647059; }
+.event-row b, .event-row small { display: block; }
+.event-row b { color: #dce8e0; font-size: 10px; line-height: 1.5; }
+.event-row small { margin-top: 4px; color: #80958a; font-size: 9px; }
+
+.uptime-row { display: flex; justify-content: space-between; gap: 10px; padding-top: 15px; border-top: 1px solid var(--border); color: #92a69b; font-size: 10px; }
+.uptime-row b { color: var(--green); font-variant-numeric: tabular-nums; }
+
+footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 24px; padding: 15px 2px 0; color: #6f8579; font-size: 9px; font-weight: 700; letter-spacing: 1px; }
+
+/* DAY MODE */
+
+.day-mode { color: #1d3329; background: radial-gradient(ellipse at 5% 0%, #26a05f1f, transparent 35%), #e9f1ec; }
+.day-mode .panel, .day-mode .stat-card { color: #20352a; border-color: #265b3f26; background: linear-gradient(145deg, #fff, #f3f8f4); }
+.day-mode .hero-copy, .day-mode .muted, .day-mode .duration-help, .day-mode .simulation-note, .day-mode .legend, .day-mode .wait-data, .day-mode .density-control, .day-mode .switch-control small { color: #647a6d; }
+.day-mode .stat-card small, .day-mode .panel-heading .eyebrow { color: #35865c; }
+.day-mode .stat-card strong, .day-mode .panel-heading h2, .day-mode .switch-control b, .day-mode .emergency-control h3 { color: #20392c; }
+.day-mode .icon-control { color: #234131; border-color: #d0e0d5; background: #f9fffa; }
+.day-mode .current-phase { color: #edf8ef; background: linear-gradient(135deg, #164e34, #102d21); }
+.day-mode .wait-card { border-color: #265b3f21; background: #1b553208; }
+.day-mode .wait-data b { color: #284535; }
+.day-mode .density-control select, .day-mode .emergency-actions select { color: #284535; border-color: #cbded0; background: #f6fbf7; }
+.day-mode .density-control select option, .day-mode .emergency-actions select option { color: #284535; background: white; }
+.day-mode .settings-panel .duration-help, .day-mode footer { color: #60796a; }
+.day-mode .metric-card { border-color: #dbe7de; background: #f8fcf9; }
+.day-mode .metric-card span, .day-mode .metric-card small, .day-mode .congestion-heading, .day-mode .congestion-labels, .day-mode .uptime-row { color: #60796a; }
+.day-mode .event-row b { color: #284535; }
+.day-mode .emergency-control { border-color: #f0d1d4; background: linear-gradient(110deg, #fff5f5, #fff); }
+.day-mode .safety-message { border-color: #d8ebdf; background: #f1faf4; }
+.day-mode .safety-message p { color: #526f5e; }
+
+/* RESPONSIVE */
+
+@media (max-width: 1050px) {
+  .content-grid, .analytics-grid { grid-template-columns: 1fr; }
+  .wait-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .intersection { height: clamp(430px, 62vw, 590px); }
+}
+
+@media (max-width: 720px) {
+  .app-shell { padding: 17px 10px 25px; }
+  .topbar { align-items: flex-start; flex-direction: column; gap: 15px; margin-bottom: 23px; }
+  .topbar-actions { width: 100%; justify-content: space-between; }
+  .hero { flex-direction: column; gap: 18px; }
+  .current-phase { min-width: 0; }
+  .stats-row { grid-template-columns: 1fr; gap: 9px; }
+  .stat-card { padding: 13px; }
+  .panel { padding: 15px; }
+  .panel-heading h2 { font-size: 17px; }
+  .live-tag { padding: 6px; font-size: 7px; }
+  .intersection { height: 440px; }
+  .road-ns { left: 29%; width: 42%; }
+  .road-ew { top: 29%; bottom: 29%; }
+  .stop-north { top: 28.5%; left: 29%; width: 42%; }
+  .stop-south { bottom: 28.5%; left: 29%; width: 42%; }
+  .stop-east { top: 29%; right: 28.5%; bottom: 29%; }
+  .stop-west { top: 29%; bottom: 29%; left: 28.5%; }
+  .signal-countdown { min-width: 40px; padding: 4px; }
+  .signal-countdown strong { font-size: 16px; }
+  .signal-countdown span, .signal-countdown small { font-size: 6px; }
+  .traffic-light { width: 25px; gap: 3px; padding: 4px 3px; }
+  .lamp { width: 14px; height: 14px; }
+  .signal-east { right: 1%; }
+  .signal-west { left: 1%; }
+  .junction-box { width: 64px; height: 48px; }
+  .junction-box b { font-size: 9px; }
+  .junction-box small { font-size: 6px; }
+  .vehicle { width: 23px; height: 40px; }
+  .vehicle-truck { width: 27px; height: 46px; }
+  .vehicle-bike { width: 18px; height: 33px; }
+  .wait-list { grid-template-columns: 1fr; }
+  .density-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .settings-heading { align-items: flex-start; flex-direction: column; gap: 7px; }
+  .settings-heading .muted { text-align: left; }
+  .emergency-control { align-items: stretch; flex-direction: column; }
+  .emergency-actions { justify-content: flex-start; }
+  .emergency-actions select { flex: 1; }
+  .feature-switches { align-items: flex-start; flex-direction: column; }
+  .analytics-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  footer { font-size: 8px; }
+}
+
+@media (max-width: 390px) {
+  .intersection { height: 390px; }
+  .panel-heading { align-items: flex-start; }
+  .live-tag { max-width: 105px; white-space: normal; line-height: 1.5; }
+  .analytics-cards { grid-template-columns: 1fr; }
+  .buttons button { flex: 1; padding: 12px 9px; }
+  .emergency-actions { display: grid; grid-template-columns: 1fr; }
+  .emergency-actions select { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
